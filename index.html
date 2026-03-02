@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Elakkiya 🎉</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{
+  background: radial-gradient(circle at top, #0f0c29, #000);
+  color:white;
+  overflow-x:hidden;
+  text-align:center;
+  height:100vh;
+}
+
+/* Slider */
+.container{
+  display:flex;
+  width:400vw;
+  height:100vh;
+  transition: transform 1.2s ease;
+}
+section{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:50px 20px;
+  opacity:0.5;
+  transform:scale(0.9);
+  transition: all 1s ease;
+}
+section.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* Glass card */
+.card{
+  background: rgba(255,255,255,0.08);
+  padding:40px 25px;
+  border-radius:25px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 50px rgba(0,191,255,0.3);
+  max-width:700px;
+  text-align:center;
+}
+
+/* Typing text */
+#typing{
+  font-size:40px;
+  font-weight:bold;
+  color:#00BFFF;
+  margin-bottom:30px;
+  display:inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(10px);}
+}
+
+/* Wishes */
+.wish{
+  font-size:18px;
+  margin:10px 0;
+  line-height:1.6;
+  color:white;
+}
+
+/* Poem lines */
+.poem-line{
+  font-size:20px;
+  margin:10px 0;
+  opacity:0;
+  animation:fadeIn 2s forwards;
+}
+.poem-line:nth-child(1){animation-delay:1s;}
+.poem-line:nth-child(2){animation-delay:3s;}
+.poem-line:nth-child(3){animation-delay:5s;}
+.poem-line:nth-child(4){animation-delay:7s;}
+.poem-line:nth-child(5){animation-delay:9s;}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* Cake */
+.cake{
+  font-size:200px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.cake:hover{transform:scale(1.1);}
+
+/* Popup */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background: rgba(0,0,0,0.95);
+  color:#00BFFF;
+  padding:30px 40px;
+  border-radius:25px;
+  transition:0.5s;
+  z-index:5000;
+  border:2px solid #00BFFF;
+  text-align:center;
+}
+.popup.active{
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* Stars */
+.star{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{from{opacity:0.3;} to{opacity:1;}}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  animation:floatUp linear forwards;
+  opacity:0.8;
+}
+@keyframes floatUp{from{transform:translateY(0);} to{transform:translateY(-120vh);opacity:0;}}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  background:red;
+  opacity:0.9;
+  z-index:5001;
+  pointer-events:none;
+  border-radius:2px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);}
+  100%{transform:translateY(120vh) rotate(360deg);}
+}
+
+/* Firework particle */
+.firework{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* Footer */
+footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding:10px;
+  background:black;
+  color:#00BFFF;
+  font-size:14px;
+}
+
+/* Next Button */
+#nextBtn{
+  padding:6px 12px;
+  font-size:14px;
+  font-weight:bold;
+  border:1px solid #00BFFF;
+  border-radius:6px;
+  background: rgba(0,191,255,0.15);
+  color:#00BFFF;
+  cursor:pointer;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:1000;
+  transition:0.3s;
+}
+#nextBtn:hover{background: rgba(0,191,255,0.3);}
+
+/* Responsive */
+@media(max-width:600px){
+  #typing{font-size:28px;}
+  .wish{font-size:16px;}
+  .poem-line{font-size:18px;}
+  .cake{font-size:130px;}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="slider">
+  <section class="active">
+    <div class="card">
+      <div id="typing"></div>
+      <p>Tonight the universe celebrates YOU 👑</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>🎉 Wishing you the happiest birthday 🎉</h2>
+      <div class="wish">May this year surprise you with happiness, protect you from worries, and guide you toward everything you’ve been hoping for.</div>
+      <div class="wish">Your smile carries a light that can brighten entire worlds.</div>
+      <div class="wish">May every step you take lead to greatness, happiness, and endless success.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>🌹 Under the Same Sky 🌹</h2>
+      <div class="poem-line">Across the distance, near or far,</div>
+      <div class="poem-line">Wishing you joy like a shining star.</div>
+      <div class="poem-line">Just like the moon, I'll stay distance,</div>
+      <div class="poem-line">But always there admiring you in silence.</div>
+      <div class="poem-line">And today, the universe bows to her light. 👑</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>🎂 CAKE CUTTING 🎂</h2>
+      <div class="cake" onclick="startCountdown()">🎂</div>
+      <p>Tap the cake to celebrate 👑</p>
+    </div>
+  </section>
+</div>
+
+<button id="nextBtn">Birthday Whispers</button>
+
+<div class="popup" id="popup">
+  <h2>🎆 HAPPY BIRTHDAY Elakkiya 🎆</h2>
+  <p>You were born to shine beyond galaxies ✨</p>
+  <button onclick="closePopup()">Close</button>
+</div>
+
+<footer>For the queen herself, Elakkiya 👑</footer>
+
+<script>
+let fireworksInterval=null;
+
+/* Slider Navigation */
+let currentSlide = 0;
+const totalSlides = document.querySelectorAll("section").length;
+const navTitles = ["Home","Birthday Whispers","Quiet Admiration","Cake"];
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+  currentSlide++;
+  if(currentSlide >= totalSlides) currentSlide = 0; 
+  goTo(currentSlide);
+  const nextIndex = (currentSlide + 1) % totalSlides;
+  document.getElementById("nextBtn").innerText = navTitles[nextIndex];
+});
+
+function goTo(index){
+  document.getElementById("slider").style.transform="translateX(-"+(index*100)+"vw)";
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll("section")[index].classList.add("active");
+}
+
+/* Typing effect - faster start */
+let text="👑 Happy Birthday Elakkiya 👑";
+let i=0;
+(function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i++);
+    let speed=i<text.length/4?15:i<text.length/2?40:100;
+    setTimeout(type,speed);
+  }
+})();
+
+/* Stars */
+for(let i=0;i<200;i++){
+  let star=document.createElement("div");
+  star.className="star";
+  star.style.top=Math.random()*100+"vh";
+  star.style.left=Math.random()*100+"vw";
+  star.style.animationDuration=(Math.random()*3+1)+"s";
+  document.body.appendChild(star);
+}
+
+/* Hearts */
+function createHeart(){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  let hearts=["💖","💗","💓","💕"];
+  heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.bottom="-30px";
+  heart.style.fontSize=(Math.random()*18+10)+"px";
+  heart.style.animationDuration=(Math.random()*6+6)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),10000);
+}
+setInterval(createHeart,700);
+
+/* Confetti */
+function createConfetti(){
+  for(let i=0;i<100;i++){
+    let conf=document.createElement("div");
+    conf.className="confetti";
+    conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    conf.style.left=Math.random()*100+"vw";
+    conf.style.width=Math.random()*6+6+"px";
+    conf.style.height=Math.random()*6+6+"px";
+    conf.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),4000);
+  }
+}
+
+/* Countdown & Fireworks + Confetti */
+function startCountdown(){
+  let count=3;
+  let overlay=document.createElement("div");
+  overlay.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;font-size:120px;color:#00BFFF;z-index:5000;";
+  overlay.innerText=count;
+  document.body.appendChild(overlay);
+
+  let interval=setInterval(()=>{
+    count--;
+    if(count>0) overlay.innerText=count;
+    else{
+      overlay.innerText="🚀";
+      clearInterval(interval);
+      setTimeout(()=>{
+        overlay.remove();
+        createConfetti();
+        startFireworkFinale();
+        document.getElementById("popup").classList.add("active");
+      },800);
+    }
+  },1000);
+}
+
+/* Rockets */
+function launchRocket(){
+  let rocket=document.createElement("div");
+  rocket.style.position="fixed";
+  rocket.style.bottom="0px";
+  rocket.style.left=Math.random()*window.innerWidth+"px";
+  rocket.style.width="4px";
+  rocket.style.height="20px";
+  rocket.style.background="white";
+  rocket.style.boxShadow="0 0 10px white";
+  document.body.appendChild(rocket);
+
+  let trail=setInterval(()=>{
+    let spark=document.createElement("div");
+    spark.style.position="fixed";
+    spark.style.width="3px";
+    spark.style.height="3px";
+    spark.style.background="orange";
+    spark.style.left=rocket.style.left;
+    spark.style.top=rocket.getBoundingClientRect().top+20+"px";
+    spark.style.borderRadius="50%";
+    document.body.appendChild(spark);
+
+    spark.animate([{transform:"translateY(0)",opacity:1},
+                   {transform:"translateY(40px)",opacity:0}],{duration:600});
+    setTimeout(()=>spark.remove(),600);
+  },80);
+
+  let peak=window.innerHeight*(Math.random()*0.5+0.3);
+
+  rocket.animate([{transform:"translateY(0)"},
+                  {transform:`translateY(-${peak}px)`}],
+                  {duration:1200,easing:"ease-out"}).onfinish=()=>{
+    clearInterval(trail);
+    explodeRocket(
+      rocket.getBoundingClientRect().left,
+      rocket.getBoundingClientRect().top
+    );
+    rocket.remove();
+  };
+}
+
+/* Explosions */
+function explodeRocket(x,y){
+  for(let i=0;i<140;i++){
+    let p=document.createElement("div");
+    p.className="firework";
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+    p.style.background=`hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(p);
+
+    let angle=Math.random()*2*Math.PI;
+    let radius=Math.random()*350;
+
+    p.animate([{transform:"translate(0,0)",opacity:1},
+               {transform:`translate(${Math.cos(angle)*radius}px,${Math.sin(angle)*radius}px)`,opacity:0}],
+               {duration:2500});
+
+    setTimeout(()=>p.remove(),2500);
+  }
+}
+
+/* Final Firework Finale */
+function startFireworkFinale(){
+  if(fireworksInterval) return;
+  let count=0;
+  fireworksInterval=setInterval(()=>{
+    for(let i=0;i<3;i++) launchRocket(); // 3 rockets at a time
+    count++;
+    if(count>20){ // firework finale lasts 20 intervals
+      clearInterval(fireworksInterval);
+      fireworksInterval=null;
+    }
+  },500);
+}
+
+function closePopup(){
+  document.getElementById("popup").classList.remove("active");
+  clearInterval(fireworksInterval);
+  fireworksInterval=null;
+}
+</script>
+</body>
+</html>
