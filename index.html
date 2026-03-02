@@ -2,66 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Happy Birthday Elakkiya 🎉</title>
 <style>
+/* Core Layout - Fixed to fit screen */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-html, body{height:100%;overflow:hidden;background:radial-gradient(circle at top, #0f0c29, #000);color:white;}
+html, body{
+  height:100%;
+  width:100%;
+  overflow:hidden; /* Prevents scrolling */
+  background:radial-gradient(circle at top, #0f0c29, #000);
+  color:white;
+  touch-action: pan-y; /* Improves touch handling */
+}
 body{text-align:center;display:flex;flex-direction:column;}
 
-/* Slider */
+/* Slider Container */
 .container{
   display:flex;
-  width:100vw;
-  height:100vh;
-  transition: transform 1s ease;
+  width:100%;
+  height:100%;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother slide */
 }
+
+/* Individual Slides */
 section{
-  width:100vw;
-  height:100vh;
+  min-width:100%;
+  height:100%;
   display:flex;
   flex-direction:column;
-  justify-content:space-around; /* center content vertically */
+  justify-content:center; /* Centers content vertically - Fixes bottom gap */
   align-items:center;
-  padding:10px;
+  padding:20px;
   opacity:0;
   transform:scale(0.95);
   transition: all 0.8s ease;
 }
 section.active{opacity:1;transform:scale(1);}
 
-/* Glass card */
+/* Glass Card */
 .card{
   background: rgba(255,255,255,0.08);
-  padding:20px 15px;
+  padding:25px 20px;
   border-radius:20px;
   backdrop-filter: blur(18px);
   box-shadow: 0 0 40px rgba(0,191,255,0.3);
-  max-width:90%;
+  width:90%;
+  max-width:450px; /* Prevents card from being too wide on desktop */
   text-align:center;
+  border:1px solid rgba(255,255,255,0.1);
 }
 
-/* Typing */
+/* Typing Text */
 #typing{
   font-size:28px;
   font-weight:bold;
   color:#00BFFF;
   animation: bounce 1.5s ease-in-out infinite;
+  margin-bottom:10px;
+  display:block;
 }
 @keyframes bounce{
   0%,100%{transform:translateY(0);}
   50%{transform:translateY(6px);}
 }
 
-/* Wishes */
-.wish{font-size:16px;margin:6px 0;line-height:1.4;color:white;}
+/* Wishes Text */
+.wish{font-size:16px;margin:8px 0;line-height:1.4;color:#eee;}
 
-/* Poem */
+/* Poem Styling */
 .poem-line{
   font-size:16px;
-  margin:6px 0;
+  margin:8px 0;
   opacity:0;
   animation:fadeIn 2s forwards;
+  color:#ddd;
+  font-style:italic;
 }
 .poem-line:nth-child(1){animation-delay:1s;}
 .poem-line:nth-child(2){animation-delay:3s;}
@@ -71,7 +87,7 @@ section.active{opacity:1;transform:scale(1);}
 @keyframes fadeIn{to{opacity:1;}}
 
 /* Cake */
-.cake{font-size:100px;cursor:pointer;transition:0.3s;}
+.cake{font-size:100px;cursor:pointer;transition:0.3s; display:block; margin: 10px 0;}
 .cake:hover{transform:scale(1.05);}
 
 /* Popup */
@@ -82,83 +98,109 @@ section.active{opacity:1;transform:scale(1);}
   transform:translate(-50%,-50%) scale(0);
   background: rgba(0,0,0,0.95);
   color:#00BFFF;
-  padding:20px 15px;
+  padding:30px 20px;
   border-radius:20px;
   transition:0.4s;
   z-index:5000;
   border:2px solid #00BFFF;
   text-align:center;
+  width:80%;
+  max-width:350px;
 }
 .popup.active{transform:translate(-50%,-50%) scale(1);}
+.popup button{
+  margin-top:15px;
+  padding:8px 20px;
+  background:#00BFFF;
+  border:none;
+  border-radius:5px;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-/* Stars */
-.star{position:fixed;width:2px;height:2px;background:white;animation:twinkle 2s infinite alternate;}
+/* Background Effects */
+.star{position:fixed;width:2px;height:2px;background:white;animation:twinkle 2s infinite alternate; pointer-events:none;}
 @keyframes twinkle{from{opacity:0.3;} to{opacity:1;}}
 
-/* Hearts */
-.heart{position:fixed;animation:floatUp linear forwards;opacity:0.8;font-size:14px;}
+.heart{position:fixed;animation:floatUp linear forwards;opacity:0.8;font-size:14px; pointer-events:none;}
 @keyframes floatUp{from{transform:translateY(0);} to{transform:translateY(-120vh);opacity:0;}}
 
-/* Confetti */
 .confetti{position:fixed;width:6px;height:6px;border-radius:2px;opacity:0.9;pointer-events:none;animation:fall linear forwards;}
 @keyframes fall{0%{transform:translateY(0) rotate(0deg);} 100%{transform:translateY(120vh) rotate(360deg);}}
 
-/* Firework particle */
 .firework{position:fixed;width:4px;height:4px;border-radius:50%;pointer-events:none;}
 
 /* Footer */
-footer{position:fixed;bottom:5px;width:100%;padding:5px;background:black;color:#00BFFF;font-size:12px;}
+footer{position:fixed;bottom:5px;width:100%;padding:5px;background:black;color:#00BFFF;font-size:12px; z-index:100;}
 
-/* Next Button for mobile */
+/* Next Button */
 #nextBtn{
-  padding:5px 10px;font-size:12px;font-weight:bold;border:1px solid #00BFFF;border-radius:6px;
-  background: rgba(0,191,255,0.15);color:#00BFFF;cursor:pointer;
-  position:fixed;bottom:10px;right:10px;z-index:1000;transition:0.3s;
+  padding:10px 18px;
+  font-size:14px;
+  font-weight:bold;
+  border:1px solid #00BFFF;
+  border-radius:20px;
+  background: rgba(0,191,255,0.15);
+  color:#00BFFF;
+  cursor:pointer;
+  position:fixed;
+  bottom:30px; /* Moved up slightly so it doesn't overlap footer on small screens */
+  right:20px;
+  z-index:1000;
+  transition:0.3s;
+  box-shadow: 0 0 10px rgba(0,191,255,0.3);
 }
-#nextBtn:hover{background: rgba(0,191,255,0.3);}
+#nextBtn:hover{background: rgba(0,191,255,0.4);}
 
-/* Responsive tweaks */
+/* Responsive Tweaks for Mobile */
 @media(max-width:500px){
   #typing{font-size:24px;}
   .wish,.poem-line{font-size:14px;}
-  .cake{font-size:90px;}
-  .card{padding:15px 10px;}
+  .cake{font-size:85px;} /* Smaller cake for small phones */
+  .card{padding:20px 15px;}
+  #nextBtn{bottom:30px; right:15px; padding:8px 15px;}
+  footer{bottom:2px; font-size:10px;}
 }
 </style>
 </head>
 <body>
 
 <div class="container" id="slider">
+  <!-- Slide 1 -->
   <section class="active">
     <div class="card">
       <div id="typing"></div>
-      <p>Tonight the universe celebrates YOU 👑</p>
+      <p style="margin-top:10px; font-size:14px; color:#aaa;">Tonight the universe celebrates YOU 👑</p>
     </div>
   </section>
 
+  <!-- Slide 2 -->
   <section>
     <div class="card">
-      <h2>🎉 Wishing you the happiest birthday 🎉</h2>
+      <h2 style="color:#00BFFF; margin-bottom:15px;">🎉 Wishing you the happiest birthday 🎉</h2>
       <div class="wish">May this year surprise you with happiness, protect you from worries, and guide you toward everything you’ve been hoping for.</div>
       <div class="wish">Your smile carries a light that can brighten entire worlds.</div>
       <div class="wish">May every step you take lead to greatness, happiness, and endless success.</div>
     </div>
   </section>
 
+  <!-- Slide 3 -->
   <section>
     <div class="card">
-      <h2>🌹 Under the Same Sky 🌹</h2>
+      <h2 style="color:#ff69b4; margin-bottom:15px;">🌹 Under the Same Sky 🌹</h2>
       <div class="poem-line">Across the distance, near or far,</div>
       <div class="poem-line">Wishing you joy like a shining star.</div>
-      <div class="poem-line">Just like the moon, I'll stay distance,</div>
-      <div class="poem-line">But always there admiring you in silence.</div>
+      <div class="poem-line">Just like the moon, I'll stay in silence,</div>
+      <div class="poem-line">But always there admiring your brilliance.</div>
       <div class="poem-line">And today, the universe bows to her light. 👑</div>
     </div>
   </section>
 
+  <!-- Slide 4 -->
   <section>
     <div class="card">
-      <h2>🎂 CAKE CUTTING 🎂</h2>
+      <h2 style="color:#FFD700; margin-bottom:10px;">🎂 CAKE CUTTING 🎂</h2>
       <div class="cake" onclick="startCountdown()">🎂</div>
       <p>Tap the cake to celebrate 👑</p>
     </div>
@@ -208,7 +250,7 @@ let i=0;
 })();
 
 /* Stars */
-for(let i=0;i<150;i++){
+for(let i=0;i<100; i++){ // Reduced count for performance
   let star=document.createElement("div");
   star.className="star";
   star.style.top=Math.random()*100+"vh";
@@ -234,7 +276,7 @@ setInterval(createHeart,700);
 
 /* Confetti */
 function createConfetti(){
-  for(let i=0;i<70;i++){
+  for(let i=0;i<50; i++){
     let conf=document.createElement("div");
     conf.className="confetti";
     conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
@@ -307,7 +349,7 @@ function launchRocket(){
 }
 
 function explodeRocket(x,y){
-  for(let i=0;i<100;i++){
+  for(let i=0;i<80; i++){
     let p=document.createElement("div");
     p.className="firework";
     p.style.left=x+"px";
@@ -316,10 +358,10 @@ function explodeRocket(x,y){
     document.body.appendChild(p);
 
     let angle=Math.random()*2*Math.PI;
-    let radius=Math.random()*200;
+    let radius=Math.random()*150;
 
-    p.animate([{transform:"translate(0,0)",opacity:1},{transform:`translate(${Math.cos(angle)*radius}px,${Math.sin(angle)*radius}px)`,opacity:0}],{duration:2000});
-    setTimeout(()=>p.remove(),2000);
+    p.animate([{transform:"translate(0,0)",opacity:1},{transform:`translate(${Math.cos(angle)*radius}px,${Math.sin(angle)*radius}px)`,opacity:0}],{duration:1500});
+    setTimeout(()=>p.remove(),1500);
   }
 }
 
